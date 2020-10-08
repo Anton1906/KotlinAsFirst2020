@@ -59,4 +59,12 @@ fun circleInside(
  * кирпич 4 х 4 х 4 пройдёт через отверстие 4 х 4.
  * Вернуть true, если кирпич пройдёт
  */
-fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean = TODO()
+fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
+    var passed = false
+    val minBreakSide = minOf(a, b, c)
+    val averageBreakSide = (a + b + c) - minBreakSide - maxOf(a, b, c)
+    val maxHoleSide = maxOf(r, s)
+    val minHoleSide = minOf(r, s)
+    if (minHoleSide >= minBreakSide && maxHoleSide >= averageBreakSide) passed = true
+    return passed
+}

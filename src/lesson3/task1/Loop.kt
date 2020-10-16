@@ -181,7 +181,7 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  */
 fun sin(x: Double, eps: Double): Double {
     val briefX = x % (PI * 2)
-    val sqrX = briefX * briefX
+    val sqrX = briefX.pow(2)
     var a = briefX
     var sinx = 0.0
     var factorialBase = 1
@@ -204,7 +204,7 @@ fun sin(x: Double, eps: Double): Double {
  */
 fun cos(x: Double, eps: Double): Double {
     val briefX = x % (PI * 2)
-    val sqrX = briefX * briefX
+    val sqrX = briefX.pow(2)
     var a = 1.0
     var cosx = 0.0
     var factorialBase = 1

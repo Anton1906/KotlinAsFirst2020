@@ -146,7 +146,12 @@ fun center(list: MutableList<Double>): MutableList<Double> = TODO()
  * представленные в виде списков a и b. Скалярное произведение считать по формуле:
  * C = a1b1 + a2b2 + ... + aNbN. Произведение пустых векторов считать равным 0.
  */
-fun times(a: List<Int>, b: List<Int>): Int = TODO()
+fun times(a: List<Int>, b: List<Int>): Int {
+    var result = 0
+    for (elNumber in a.indices)
+        result += a[elNumber] * b[elNumber]
+    return result
+}
 
 /**
  * Средняя (3 балла)
@@ -177,7 +182,21 @@ fun accumulate(list: MutableList<Int>): MutableList<Int> = TODO()
  * Результат разложения вернуть в виде списка множителей, например 75 -> (3, 5, 5).
  * Множители в списке должны располагаться по возрастанию.
  */
-fun factorize(n: Int): List<Int> = TODO()
+fun factorize(n: Int): List<Int> {
+    var number = n
+    var divider = 2
+    val simpleDivisors = mutableListOf<Int>()
+    while (divider < number) {
+        while (number % divider == 0) {
+            simpleDivisors.add(divider)
+            number /= divider
+        }
+        divider++
+    }
+    if (number > 1)
+        simpleDivisors.add(divider)
+    return simpleDivisors
+}
 
 /**
  * Сложная (4 балла)
@@ -186,7 +205,7 @@ fun factorize(n: Int): List<Int> = TODO()
  * Результат разложения вернуть в виде строки, например 75 -> 3*5*5
  * Множители в результирующей строке должны располагаться по возрастанию.
  */
-fun factorizeToString(n: Int): String = TODO()
+fun factorizeToString(n: Int): String = factorize(n).joinToString(separator = "*")
 
 /**
  * Средняя (3 балла)
@@ -195,7 +214,16 @@ fun factorizeToString(n: Int): String = TODO()
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var number = n
+    val result = mutableListOf<Int>()
+    if (n == 0) result.add(0)
+    while (number >= 1) {
+        result.add(0, number % base)
+        number /= base
+    }
+    return result
+}
 
 /**
  * Сложная (4 балла)
@@ -208,7 +236,11 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * Использовать функции стандартной библиотеки, напрямую и полностью решающие данную задачу
  * (например, n.toString(base) и подобные), запрещается.
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String =
+    if (n == 0) "0" else
+        convert(n, base).joinToString(separator = "") {
+            if (it >= 10) (it - 10 + 'a'.toInt()).toChar().toString() else it.toString()
+        }
 
 /**
  * Средняя (3 балла)

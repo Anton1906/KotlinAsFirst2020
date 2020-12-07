@@ -3,6 +3,8 @@
 package lesson2.task2
 
 import lesson1.task1.sqr
+import java.lang.Integer.min
+import java.lang.Math.max
 
 /**
  * Пример
@@ -60,11 +62,7 @@ fun circleInside(
  * Вернуть true, если кирпич пройдёт
  */
 fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
-    var passed = false
     val minBreakSide = minOf(a, b, c)
-    val averageBreakSide = (a + b + c) - minBreakSide - maxOf(a, b, c)
-    val maxHoleSide = maxOf(r, s)
-    val minHoleSide = minOf(r, s)
-    if (minHoleSide >= minBreakSide && maxHoleSide >= averageBreakSide) passed = true
-    return passed
+    val averageBreakSide = a + b + c - maxOf(a, b, c) - minBreakSide
+    return minBreakSide <= min(r, s) && averageBreakSide <= max(r, s)
 }

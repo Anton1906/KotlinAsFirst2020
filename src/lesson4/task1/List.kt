@@ -220,8 +220,8 @@ fun convert(n: Int, base: Int): List<Int> {
     do {
         result.add(0, number % base)
         number /= base
-} while (number > 0)
-return result
+    } while (number > 0)
+    return result
 }
 
 /**

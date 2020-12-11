@@ -121,8 +121,8 @@ fun bestLongJump(jumps: String): Int {
     val list = jumps.split(" ")
     var maxJump = -1
     for (str in list) {
-        val isItInt = str.toIntOrNull() is Int
-        if (isItInt) maxJump = max(str.toInt(), maxJump)
+        val isItInt = str.toIntOrNull() ?: -1
+        if (isItInt > maxJump) maxJump = isItInt
     }
     return maxJump
 }

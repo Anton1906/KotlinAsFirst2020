@@ -3,10 +3,7 @@
 package lesson8.task1
 
 import lesson1.task1.sqr
-import kotlin.math.PI
-import kotlin.math.cos
-import kotlin.math.sin
-import kotlin.math.sqrt
+import kotlin.math.*
 
 // Урок 8: простые классы
 // Максимальное количество баллов = 40 (без очень трудных задач = 11)
@@ -151,26 +148,31 @@ class Line private constructor(val b: Double, val angle: Double) {
     override fun toString() = "Line(${cos(angle)} * y = ${sin(angle)} * x + $b)"
 }
 
+fun angleBetweenPoints(a: Point, b: Point): Double =
+    if (a.x == b.x) PI / 2 else abs((atan((b.y - a.y) / (b.x - a.x)) + PI) % PI)
+
 /**
  * Средняя (3 балла)
  *
  * Построить прямую по отрезку
  */
-fun lineBySegment(s: Segment): Line = TODO()
+fun lineBySegment(s: Segment): Line = Line(s.end, angleBetweenPoints(s.begin, s.end))
 
 /**
  * Средняя (3 балла)
  *
  * Построить прямую по двум точкам
  */
-fun lineByPoints(a: Point, b: Point): Line = TODO()
+fun lineByPoints(a: Point, b: Point): Line = lineBySegment(Segment(a, b))
 
 /**
  * Сложная (5 баллов)
  *
  * Построить серединный перпендикуляр по отрезку или по двум точкам
  */
-fun bisectorByPoints(a: Point, b: Point): Line = TODO()
+fun bisectorByPoints(a: Point, b: Point): Line =
+    Line(Point((a.x + b.x) / 2, (a.y + b.y) / 2), ((angleBetweenPoints(a, b) + PI / 2) % PI))
+
 
 /**
  * Средняя (3 балла)
